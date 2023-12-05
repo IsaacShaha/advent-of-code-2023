@@ -1,9 +1,9 @@
 module Trebuchet where
 
-import qualified Control.Monad as CM (liftM2, mapM_)
-import qualified Data.Char     as DC (digitToInt, isDigit)
-import qualified Data.List     as DL (isPrefixOf)
-import qualified System.IO     as SI (IOMode (ReadMode), hGetContents, openFile)
+import qualified Control.Monad as CM
+import qualified Data.Char     as DC
+import qualified Data.List     as DL
+import qualified System.IO     as SI
 
 calibrationValue :: String -> Int
 calibrationValue = CM.liftM2 (+) ((10*) . head) last . ints
@@ -31,8 +31,11 @@ ints xs = case digitToInt xs of
   Nothing -> ints (tail xs)
 
 main :: IO ()
-main = do
-  input <- SI.hGetContents =<< SI.openFile "input/trebutchet.txt" SI.ReadMode
-  let lines = words input
-  print . sum . map calibrationValue $ lines
+main
+    = print
+    . sum
+    . map calibrationValue
+  =<< fmap lines
+  <$> SI.hGetContents
+  =<< SI.openFile "input/trebutchet.txt" SI.ReadMode
 
