@@ -1,8 +1,8 @@
 module CubeConundrum where
 
 import qualified Data.Either        as DE
+import qualified Data.Foldable      as DF
 import qualified Data.Map           as DM
-import qualified System.IO          as SI
 import qualified Text.Parsec        as TP
 import qualified Text.Parsec.String as TPS
 
@@ -35,7 +35,9 @@ gameParser = do
 
 handParser :: TPS.Parser Hand
 handParser
-    = foldr (\(colour, amount) hand -> DM.insert colour amount hand) defaultHand
+    = DF.foldl'
+        (\hand (colour, amount) -> DM.insert colour amount hand)
+        defaultHand
   <$> TP.sepBy colourParser (TP.string ", ")
 
 validHand :: Hand -> Hand -> Bool

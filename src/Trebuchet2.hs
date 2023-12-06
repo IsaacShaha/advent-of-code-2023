@@ -1,15 +1,15 @@
 module Trebuchet where
 
-import qualified Control.Monad as CM
-import qualified Data.Char     as DC
-import qualified Data.List     as DL
-import qualified System.IO     as SI
+import qualified Control.Applicative as CA
+import qualified Data.Char           as DC
+import qualified Data.List           as DL
+import qualified System.IO           as SI
 
 calibrationValue :: String -> Int
-calibrationValue = CM.liftM2 (+) ((10*) . head) last . ints
+calibrationValue = CA.liftA2 (+) ((10*) . head) last . ints
 
 digitToInt :: String -> Maybe Int
-digitToInt xs
+digitToInt xs@(x:_)
   | startsWith "zero" = Just 0
   | startsWith "one" = Just 1
   | startsWith "two" = Just 2
@@ -34,8 +34,7 @@ main :: IO ()
 main
     = print
     . sum
-    . map calibrationValue
-  =<< fmap lines
-  <$> SI.hGetContents
+    . fmap calibrationValue
+    . lines
+  =<< SI.hGetContents
   =<< SI.openFile "input/trebutchet.txt" SI.ReadMode
-
