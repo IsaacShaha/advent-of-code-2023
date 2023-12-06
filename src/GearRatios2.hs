@@ -61,8 +61,3 @@ main
     . lines
   =<< SI.hGetContents
   =<< SI.openFile "input/gear-ratios.txt" SI.ReadMode
-
--- Idea: Replace the symbol set with a symbol map with the index as the key and
--- a list of part numbers as the value. When getting the part numbers, add the
--- number to the list for each adjacent symbol in the map. Gather * symbols that
--- map to a length of 2 to compute the solution.
