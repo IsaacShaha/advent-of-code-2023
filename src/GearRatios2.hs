@@ -22,7 +22,7 @@ index2D :: [[a]] -> [[((Int, Int), a)]]
 index2D = zipWith (zip . zip [0..] . repeat) [0..]
 
 numberNeighboursSet :: [[((Int, Int), Char)]] -> DMp.Map (Int, Int) ([Int])
-numberNeighboursSet cs
+numberNeighboursSet
     = DL.foldl'
       ( \accumulator (((x1, x2), y), n)
          -> DMp.unionWith (++) accumulator
@@ -39,7 +39,6 @@ numberNeighboursSet cs
              -> (DC.isDigit . snd $ char1) == (DC.isDigit . snd $ char2))
           $ char )
       []
-    $ cs
 
 sparse :: [((Int, Int), a)] -> (((Int, Int), Int), [a])
 sparse

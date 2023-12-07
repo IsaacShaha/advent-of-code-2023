@@ -1,7 +1,9 @@
 { pkgs ? import <nixpkgs> { } }:
 pkgs.mkShell {
   buildInputs = with pkgs; [
-    ghc
+    (haskellPackages.ghcWithPackages (pkgs: with pkgs; [
+      vector
+    ]))
     stylish-haskell
   ];
 }
