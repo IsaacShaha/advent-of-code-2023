@@ -58,4 +58,4 @@ main :: IO ()
 main
     = print
     . numCards
-  =<< U.unsafeParseFromFile fileParser "input/scratchcards.txt"
+  =<< U.unsafeParseFromFile fileParser "scratchcards.txt"

@@ -137,4 +137,4 @@ main
       . DL.foldl1' composeMaps
       . fmap (fillMap . DS.sort)
       . snd )
-  =<< U.unsafeParseFromFile fileParser "input/if-you-give-a-seed-fertilizer.txt"
+  =<< U.unsafeParseFromFile fileParser "if-you-give-a-seed-fertilizer.txt"

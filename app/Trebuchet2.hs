@@ -37,4 +37,4 @@ main
     . fmap calibrationValue
     . lines
   =<< SI.hGetContents
-  =<< SI.openFile "input/trebutchet.txt" SI.ReadMode
+  =<< SI.openFile "input/trebuchet.txt" SI.ReadMode

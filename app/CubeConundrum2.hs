@@ -52,4 +52,4 @@ main
     = print
     . sum
     . map (power . minHand . hands)
-  =<< U.unsafeParseFromFile fileParser "input/cube-conundrum.txt"
+  =<< U.unsafeParseFromFile fileParser "cube-conundrum.txt"

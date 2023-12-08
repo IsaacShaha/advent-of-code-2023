@@ -53,4 +53,4 @@ main
     = print
     . minimum
     . CA.liftA2 (<*>) (fmap seedLocation . fst) (pure . snd)
-  =<< U.unsafeParseFromFile fileParser "input/if-you-give-a-seed-fertilizer.txt"
+  =<< U.unsafeParseFromFile fileParser "if-you-give-a-seed-fertilizer.txt"

@@ -43,4 +43,4 @@ main
     . sum
     . filter (> 0)
     . fmap score
-  =<< U.unsafeParseFromFile fileParser "input/scratchcards.txt"
+  =<< U.unsafeParseFromFile fileParser "scratchcards.txt"

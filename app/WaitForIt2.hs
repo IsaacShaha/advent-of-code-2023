@@ -57,4 +57,4 @@ main
         (subtract)
         (uncurry firstRecordBeater)
         (uncurry lastRecordBeater)
-  =<< U.unsafeParseFromFile fileParser "input/wait-for-it.txt"
+  =<< U.unsafeParseFromFile fileParser "wait-for-it.txt"

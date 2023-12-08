@@ -38,4 +38,4 @@ main
     = print
     . product
     . map (length . uncurry recordDistances)
-  =<< U.unsafeParseFromFile fileParser "input/wait-for-it.txt"
+  =<< U.unsafeParseFromFile fileParser "wait-for-it.txt"
