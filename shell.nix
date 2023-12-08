@@ -1,10 +1,11 @@
 { pkgs ? import <nixpkgs> { } }:
 let
+  # Add autocomplete to si
   si = pkgs.writeShellScriptBin "si" ''
-    stack exec ghci app/"$1"
+    stack exec ghci "$1"
   '';
   srun = pkgs.writeShellScriptBin "srun" ''
-    stack exec runghc app/"$1"
+    stack exec runghc "$1"
   '';
 in
 pkgs.mkShell {

@@ -6,4 +6,4 @@ import qualified Text.Parsec.String as TPS
 
 unsafeParseFromFile :: TPS.Parser a -> FilePath -> IO a
 unsafeParseFromFile parser filePath
-  = DE.fromRight undefined <$> U.unsafeParseFromFile parser filePath
+  = DE.fromRight undefined <$> TPS.parseFromFile parser filePath
