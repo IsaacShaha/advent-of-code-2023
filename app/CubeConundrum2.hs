@@ -1,10 +1,11 @@
-module CubeConundrum where
+module CubeConundrum2 where
 
 import qualified Data.Either        as DE
 import qualified Data.Foldable      as DF
 import qualified Data.Map           as DM
 import qualified Text.Parsec        as TP
 import qualified Text.Parsec.String as TPS
+import qualified Utils              as U
 
 type Hand = DM.Map String Int
 defaultHand = DM.fromList [("red", 0), ("green", 0), ("blue", 0)]
@@ -51,5 +52,4 @@ main
     = print
     . sum
     . map (power . minHand . hands)
-    . DE.fromRight undefined
-  =<< TPS.parseFromFile fileParser "input/cube-conundrum.txt"
+  =<< U.unsafeParseFromFile fileParser "input/cube-conundrum.txt"

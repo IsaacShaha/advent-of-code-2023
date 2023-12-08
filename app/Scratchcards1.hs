@@ -1,8 +1,9 @@
-module Scratchcards where
+module Scratchcards1 where
 
 import qualified Data.Either        as DE
 import qualified Text.Parsec        as TP
 import qualified Text.Parsec.String as TPS
+import qualified Utils              as U
 
 data Card = Card {
   winningNumbers :: [Int]
@@ -42,5 +43,4 @@ main
     . sum
     . filter (> 0)
     . fmap score
-    . DE.fromRight undefined
-  =<< TPS.parseFromFile fileParser "input/scratchcards.txt"
+  =<< U.unsafeParseFromFile fileParser "input/scratchcards.txt"

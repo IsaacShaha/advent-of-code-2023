@@ -1,11 +1,11 @@
-module IfYouGiveASeedAFertilizer where
+module IfYouGiveASeedAFertilizer1 where
 
 import qualified Control.Applicative as CA
-import qualified Control.Monad       as CM
 import qualified Data.Either         as DE
 import qualified Data.Foldable       as DF
 import qualified Text.Parsec         as TP
 import qualified Text.Parsec.String  as TPS
+import qualified Utils               as U
 
 type Map = [Mapping]
 data Mapping = Mapping {
@@ -17,7 +17,7 @@ data Mapping = Mapping {
 -- Input Parsing
 
 fileParser :: TPS.Parser ([Int], [Map])
-fileParser = CM.liftM2 (,) seedParser mapsParser
+fileParser = CA.liftA2 (,) seedParser mapsParser
 
 intsParser :: TPS.Parser [Int]
 intsParser = TP.sepBy1 (read <$> TP.many1 TP.digit) $ TP.char ' '
@@ -53,5 +53,4 @@ main
     = print
     . minimum
     . CA.liftA2 (<*>) (fmap seedLocation . fst) (pure . snd)
-  =<< DE.fromRight undefined
-  <$> TPS.parseFromFile fileParser "input/if-you-give-a-seed-fertilizer.txt"
+  =<< U.unsafeParseFromFile fileParser "input/if-you-give-a-seed-fertilizer.txt"

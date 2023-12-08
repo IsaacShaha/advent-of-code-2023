@@ -1,0 +1,9 @@
+name: advent-of-code-2k23
+
+dependencies:
+  - base >= 4.7 && < 5
+  - containers >= 0.6.7
+  - parsec >= 3.1.16.1
+
+library:
+  source-dirs: src

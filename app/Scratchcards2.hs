@@ -1,4 +1,4 @@
-module Scratchcards where
+module Scratchcards2 where
 
 import qualified Data.Either        as DE
 import qualified Data.List          as DL
@@ -6,6 +6,7 @@ import qualified Data.Maybe         as DM
 import qualified Data.Sequence      as DS
 import qualified Text.Parsec        as TP
 import qualified Text.Parsec.String as TPS
+import qualified Utils              as U
 
 data Card = Card {
   cardNumber     :: Int
@@ -57,5 +58,4 @@ main :: IO ()
 main
     = print
     . numCards
-    . DE.fromRight undefined
-  =<< TPS.parseFromFile fileParser "input/scratchcards.txt"
+  =<< U.unsafeParseFromFile fileParser "input/scratchcards.txt"

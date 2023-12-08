@@ -1,13 +1,13 @@
-module IfYouGiveASeedAFertilizer where
+module IfYouGiveASeedAFertilizer2 where
 
 import qualified Control.Applicative as CA
-import qualified Control.Monad       as CM
 import qualified Data.Either         as DE
 import qualified Data.Foldable       as DF
 import qualified Data.List           as DL
 import qualified Data.Sequence       as DS
 import qualified Text.Parsec         as TP
 import qualified Text.Parsec.String  as TPS
+import qualified Utils               as U
 
 type Map = DS.Seq Mapping
 data Mapping = Mapping {
@@ -21,7 +21,7 @@ instance Ord Mapping where
 -- Input Parsing
 
 fileParser :: TPS.Parser ([(Int, Int)], [Map])
-fileParser = CM.liftM2 (,) seedParser mapsParser
+fileParser = CA.liftA2 (,) seedParser mapsParser
 
 intsParser :: TPS.Parser [Int]
 intsParser = TP.sepBy1 (read <$> TP.many1 TP.digit) $ TP.char ' '
@@ -137,5 +137,4 @@ main
       . DL.foldl1' composeMaps
       . fmap (fillMap . DS.sort)
       . snd )
-    . DE.fromRight undefined
-  =<< TPS.parseFromFile fileParser "input/if-you-give-a-seed-fertilizer.txt"
+  =<< U.unsafeParseFromFile fileParser "input/if-you-give-a-seed-fertilizer.txt"

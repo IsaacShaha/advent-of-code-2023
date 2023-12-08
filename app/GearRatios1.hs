@@ -1,4 +1,4 @@
-module GearRatios where
+module GearRatios1 where
 
 import qualified Control.Applicative as CA
 import qualified Data.Char           as DC
