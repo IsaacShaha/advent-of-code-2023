@@ -53,7 +53,8 @@ nodeParser = do
 
 main :: IO ()
 main = do
-  (directions, nodes) <- U.unsafeParseFromFile fileParser "haunted-wasteland.txt"
+  (directions, nodes)
+   <- U.unsafeParseFromFile fileParser "haunted-wasteland.txt"
   print
     . subtract 1
     . length
