@@ -1,6 +1,5 @@
 { pkgs ? import <nixpkgs> { } }:
 let
-  # Add autocomplete to si
   si = pkgs.writeShellScriptBin "si" ''
     stack exec ghci "$1"
   '';
@@ -12,9 +11,9 @@ pkgs.mkShell {
   buildInputs = with pkgs; [
     (haskellPackages.ghcWithPackages (pkgs: with pkgs; [
       stack
+      stylish-haskell
     ]))
     si
-    stylish-haskell
     srun
   ];
 }
