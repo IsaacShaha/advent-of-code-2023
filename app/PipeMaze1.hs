@@ -122,6 +122,10 @@ tileFromVectors tiles (x, y)
   $ tiles
 
 main :: IO ()
-main = do
-    tiles <- unsafeParseFromFile fileParser "pipe-maze.txt"
-    print . (`div` 2) . subtract 1 . length . findLoop tiles . animalStart $ tiles
+main
+    = print
+    . (`div` 2)
+    . subtract 1
+    . length
+    . (flip findLoop =<< animalStart)
+  =<< unsafeParseFromFile fileParser "pipe-maze.txt"
