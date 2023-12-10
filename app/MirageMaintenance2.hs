@@ -1,5 +1,6 @@
 module MirageMaintenance2 where
 
+import           Control.Arrow      ((>>>))
 import           Data.Sequence      (Seq (Empty, (:<|), (:|>)), fromList,
                                      reverse)
 import           Prelude            hiding (reverse)
@@ -40,4 +41,4 @@ seqLast (_ :|> a) = a
 main :: IO ()
 main
     = unsafeParseFromFile fileParser "mirage-maintenance.txt"
-  >>= print . sum . fmap prev
+  >>= (fmap prev >>> sum >>> print)

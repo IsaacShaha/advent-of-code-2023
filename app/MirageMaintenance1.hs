@@ -1,5 +1,6 @@
 module MirageMaintenance1 where
 
+import           Control.Arrow      ((>>>))
 import           Data.Sequence      (Seq (Empty, (:<|), (:|>)), fromList)
 import           Text.Parsec        (char, digit, many1, newline, option,
                                      sepBy1)
@@ -35,4 +36,4 @@ seqLast (_ :|> a) = a
 main :: IO ()
 main
     = unsafeParseFromFile fileParser "mirage-maintenance.txt"
-  >>= print . sum . fmap next
+  >>= (fmap next >>> sum >>> print)
