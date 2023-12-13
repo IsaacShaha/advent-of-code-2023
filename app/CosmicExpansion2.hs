@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedLists #-}
-
 module CosmicExpansion2 where
 
 import qualified Data.List   as DL
