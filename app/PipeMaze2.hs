@@ -242,4 +242,3 @@ main = do
         (sequenceDropLast . sequenceTail $ path)
         (sequenceDropLast directions)
     $ turns
-  print dominantTurn'
