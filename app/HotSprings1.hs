@@ -4,8 +4,6 @@ import qualified Data.Maybe  as DM
 import qualified Text.Parsec as TP
 import qualified Utils       as U
 
-import           Debug.Trace
-
 -- Input Parsing
 
 type Parser = TP.Parsec String ()

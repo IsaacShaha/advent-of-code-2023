@@ -1,2 +1,5 @@
+extra-deps:
+  - memoize-1.1.2@sha256:d7701b55ed63434d1e8b507d0a76bb58f2fe31b7ce329132e1ca808c7001da49,1928
+
 resolver:
   url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/21/23.yaml
