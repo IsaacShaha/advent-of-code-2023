@@ -57,9 +57,8 @@ possibilities springs counts = DM.catMaybes $ go springs counts False
     noMatch = [Nothing]
 
 main :: IO ()
-main = do
-  input <- U.unsafeParseFromFile fileParser "hot-springs.txt"
-  print
+main
+    = print
     . sum
     . fmap (length . uncurry possibilities)
-    $ input
+  =<< U.unsafeParseFromFile fileParser "hot-springs.txt"

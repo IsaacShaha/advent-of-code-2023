@@ -64,12 +64,12 @@ possibilities springs counts = go' springs counts False
     noMatch = 0
 
 main :: IO ()
-main = do
-  print
+main
+    = print
     . sum
     . fmap
         ( uncurry possibilities
         . \(springs, counts)
-         -> ( DL.intercalate [Unknown] . replicate 5 $ springs
+          -> ( DL.intercalate [Unknown] . replicate 5 $ springs
             , concat . replicate 5 $ counts ) )
   =<< U.unsafeParseFromFile fileParser "hot-springs.txt"
