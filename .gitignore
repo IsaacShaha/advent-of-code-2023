@@ -3,3 +3,4 @@
 .gitignore
 *.cabal
 .direnv/*
+input/*
