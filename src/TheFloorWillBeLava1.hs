@@ -1,4 +1,4 @@
-module TheFloorWillBeLava2 where
+module TheFloorWillBeLava1 where
 
 import qualified Control.Applicative as CA
 import           Control.Monad.State (State)
@@ -13,6 +13,7 @@ import qualified Utils               as U
 -- | Input Parsing
 
 type Parser = TP.Parsec String ()
+
 fileParser :: Parser (Vector (Vector Tile))
 fileParser = DV.fromList <$> TP.sepBy1 rowParser TP.newline
 
@@ -24,7 +25,7 @@ tileParser = charToTile <$> TP.oneOf ".-\\/|"
 
 -- | Logic
 
-data Direction = Down | Left | Right | Up deriving (Bounded, Enum, Eq, Show)
+data Direction = Down | Left | Right | Up deriving (Eq, Show)
 
 nextIndex :: (Int, Int, Direction) -> (Int, Int)
 nextIndex (row, column, Down)  = (row + 1, column)
@@ -49,14 +50,9 @@ charToTile '\\' = LeftLeaningMirror
 charToTile '/'  = RightLeaningMirror
 charToTile '|'  = VerticalSplitter
 
-energized :: Vector (Vector Tile) -> Direction -> Int -> [(Int, Int)]
-energized tiles direction index = CMS.evalState (go tiles (row, column, direction)) []
+energized :: Vector (Vector Tile) -> [(Int, Int)]
+energized tiles = CMS.evalState (go tiles (0, 0, Right)) []
   where
-    (row, column) = case direction of
-      Down  -> (0, index)
-      Left  -> (index, DV.length (DV.head tiles) - 1)
-      Right -> (index, 0)
-      Up    -> (DV.length tiles - 1, index)
     go :: Vector (Vector Tile)
        -> (Int, Int, Direction)
        -> State [(Int, Int, Direction)] [(Int, Int)]
@@ -91,7 +87,7 @@ nextMoves :: Vector (Vector Tile)
           -> [(Int, Int, Direction)]
 nextMoves tiles move@(row, column, direction)
     = zipWith (CA.liftA2 (,,) fst snd)
-  =<< fmap (nextIndex . (row, column,))
+  =<< fmap (nextIndex . (,,) row column)
     $ nextDirections (tiles!row!column) direction
 
 tileToChar :: Tile -> Char
@@ -102,27 +98,9 @@ tileToChar RightLeaningMirror = '/'
 tileToChar VerticalSplitter   = '|'
 
 main :: IO ()
-main = do
-  tiles <- U.unsafeParseFromFile fileParser "the-floor-will-be-lava.txt"
-  let directions = [minBound .. maxBound] :: [Direction]
-      horizontalStartIndices = [0 .. DV.length tiles - 1]
-      verticalStartIndices = [0 .. DV.length (DV.head tiles) - 1]
-      starts
-        = concat
-        . zipWith
-            (zip . repeat)
-            directions
-        $ [ verticalStartIndices
-          , horizontalStartIndices
-          , horizontalStartIndices
-          , verticalStartIndices ]
-  -- print
-  --   . maximum
-  --   . fmap length
-  --   . fmap nub
-  --   . fmap (uncurry . energized $ tiles)
-  --   $ starts
-  print $ DL.sort $ energized tiles Down 3
-  print $ nub $ DL.sort $ energized tiles Down 3
-
--- [(9,7),(9,5),(9,1),(8,7),(8,6),(8,5),(8,4),(8,3),(8,2),(8,1),(7,7),(7,6),(7,5),(7,4),(7,3),(7,2),(7,1),(7,0),(6,7),(6,6),(6,5),(6,4),(6,3),(6,1),(5,6),(5,5),(5,3),(5,1),(4,6),(4,5),(4,3),(4,1),(3,6),(3,5),(3,3),(3,1),(2,9),(2,8),(2,7),(2,6),(2,5),(2,3),(2,1),(1,5),(1,3),(1,1),(0,5),(0,4),(0,3),(0,2),(0,1),(0,3)]
+main
+    = print
+    . length
+    . DL.nub
+    . energized
+  =<< U.unsafeParseFromFile fileParser "the-floor-will-be-lava.txt"

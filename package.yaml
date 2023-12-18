@@ -1,11 +1,21 @@
 name: advent-of-code-2k23
 
 dependencies:
+  - array >= 0.5.4.0
   - base >= 4.7 && < 5
   - containers >= 0.6.7
+  - deepseq >= 1.4.8.0
   - memoize >= 1.1.2
+  - mtl >= 2.2.2
   - parsec >= 3.1.16.1
   - vector >= 0.13.1.0
+
+executables:
+  main:
+    dependencies:
+      - advent-of-code-2k23
+    main: Main.hs
+    source-dirs: app
 
 library:
   source-dirs: src
