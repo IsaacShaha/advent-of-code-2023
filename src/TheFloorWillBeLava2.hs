@@ -132,7 +132,8 @@ reach tiles = nub . flip CMS.evalState [] . go tiles
                           else exit entry1'
                   nextMoves' = nextMoves tiles exit'
               nextResults <- go tiles `mapM` nextMoves'
-              return $ validConnectors ++ positions segment' ++ concat nextResults
+              return
+                $ validConnectors ++ positions segment' ++ concat nextResults
 
 segment :: Vector (Vector Tile) -> Move -> Segment
 segment tiles
